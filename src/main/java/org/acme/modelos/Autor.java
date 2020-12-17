@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.modelos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

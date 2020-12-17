@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.interfaces;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import org.acme.modelos.Libro;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 @Path("/libros")

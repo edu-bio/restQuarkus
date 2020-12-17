@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.resources;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.acme.interfaces.LibroService;
+import org.acme.modelos.Libro;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 @Path("/books")

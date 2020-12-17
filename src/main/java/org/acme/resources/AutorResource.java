@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.resources;
 
 import java.util.List;
 
@@ -11,6 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.acme.interfaces.AutorService;
+import org.acme.modelos.Autor;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 

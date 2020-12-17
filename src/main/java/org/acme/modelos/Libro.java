@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.modelos;
 
 import java.util.List;
 
