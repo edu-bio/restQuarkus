@@ -21,7 +21,6 @@ import io.quarkus.test.Mock;
 //los endopoints que pones en el puerto quarkus
 
 @Path("/authors")
-@Mock
 public class AutorResource {
 
     @Inject
