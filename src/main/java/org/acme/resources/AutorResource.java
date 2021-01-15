@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.resources;
 
 import java.util.List;
 
@@ -11,12 +11,17 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.acme.clases.Autor;
+import org.acme.services.AutorService;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
+
+import io.quarkus.test.Mock;
 
 //los endopoints que pones en el puerto quarkus
 
 @Path("/authors")
+@Mock
 public class AutorResource {
 
     @Inject
@@ -52,7 +57,7 @@ public class AutorResource {
     }
     
     @PUT
-    @Path("/dd")
+    @Path("/update")
     @Produces(MediaType.APPLICATION_JSON)
     Autor actualizarLibro(Autor autor) {
     	System.err.println("init resoruce");

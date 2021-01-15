@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.clases;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -17,5 +17,14 @@ public class ExampleResourceTest {
              .statusCode(200)
              .body(is("Hello RESTEasy"));
     }
+    
+    @Test
+    public void testHelloName() {
+        given()
+          .when().get("/hello/name/edu")
+          .then()
+             .statusCode(200)
+             .body(is("Hello edu"));
+    }
 
 }

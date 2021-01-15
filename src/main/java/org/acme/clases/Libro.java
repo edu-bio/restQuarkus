@@ -1,4 +1,4 @@
-package org.acme;
+package org.acme.clases;
 
 import java.util.List;
 
