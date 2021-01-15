@@ -59,7 +59,7 @@ public class AutorResource {
     @PUT
     @Path("/update")
     @Produces(MediaType.APPLICATION_JSON)
-    Autor actualizarLibro(Autor autor) {
+    Autor actualizarAutor(Autor autor) {
     	System.err.println("init resoruce");
     	return autorService.actualizarAutor(autor);
     }
