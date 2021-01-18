@@ -71,11 +71,18 @@ public class LibroResourceTest {
 	
 	@Test
 	public void testBorrarLibro() {
+		Libro a = new Libro(1, 200, "LibroBorrado");
 		
+		Mockito.when(service.getLibro(1)).thenReturn(null);
+		service.borrarLibro(a.getId());
+		Assertions.assertEquals(service.getLibro(1), null);
 	}
 	
 	@Test
 	public void testActualizarLibro() {
-		
+		Libro a = new Libro(1,112,"Experimento");
+		Mockito.when(service.actualizarLibro(Mockito.any())).thenReturn(a);
+		Libro actualizado = service.actualizarLibro(a);
+		Assertions.assertEquals(actualizado.getTitulo(),"Experimento");
 	}
 }
