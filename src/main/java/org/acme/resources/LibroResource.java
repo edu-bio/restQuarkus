@@ -1,6 +1,7 @@
 package org.acme.resources;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,7 +15,9 @@ import org.acme.clases.Libro;
 import org.acme.services.LibroService;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
+
 @Path("/books")
+@ApplicationScoped
 public class LibroResource {
 
 	//los endopoints que pones en el puerto quarkus

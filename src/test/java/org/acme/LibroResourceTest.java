@@ -3,24 +3,25 @@ package org.acme;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.acme.clases.Libro;
 import org.acme.resources.LibroResource;
 import org.acme.services.LibroService;
-import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import com.google.inject.Inject;
-
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 
-@RegisterRestClient
+
 @QuarkusTest
 public class LibroResourceTest {
 
+	@RestClient
 	@InjectMock
 	LibroService service;
 	
@@ -45,18 +46,13 @@ public class LibroResourceTest {
 	public void testGetLibro() {
 		Libro a= new Libro (1,123,"La Sombra del Viento");
 		
-        Assertions.assertEquals("pepito", resource.getLibro(a.getId()).getTitulo());
+		Mockito.when(service.getLibro(Mockito.anyInt())).thenReturn(a);
+		
+        Assertions.assertEquals("La Sombra del Viento", resource.getLibro(a.getId()).getTitulo());
     }
 	
 	@Test
     public void testListado() {
-		List<Libro> lista = new ArrayList<>();
-		Libro a= new Libro(1,231,"titulo1");
-		Libro b= new Libro(2,123,"titulo2");
-		Libro c= new Libro(3,213,"titulo3");
-        lista.add(a);
-        lista.add(b);
-        lista.add(c);
         
         Assertions.assertEquals("titulo2", resource.listado().get(1).getTitulo());
        
@@ -67,7 +63,9 @@ public class LibroResourceTest {
 		Libro a= new Libro(1,41,"elLibroSinNombre");
 		Libro b = service.crearLibro(a);
 		
-		Assertions.assertEquals("edu", resource.crearLibro(b).getTitulo());
+		Mockito.when(service.crearLibro(Mockito.any())).thenReturn(a);
+		
+		Assertions.assertEquals("elLibroSinNombre", resource.crearLibro(b).getTitulo());
 		
 	}
 	

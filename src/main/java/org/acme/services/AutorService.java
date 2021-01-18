@@ -2,6 +2,7 @@ package org.acme.services;
 
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,6 +17,7 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 //los endpoints del microservicio al que llamas
 
 @Path("/autores")
+@ApplicationScoped
 @RegisterRestClient
 public interface AutorService {
 
