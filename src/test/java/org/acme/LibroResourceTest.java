@@ -31,12 +31,17 @@ public class LibroResourceTest {
 	@BeforeEach
     void setUp() {
 		List<Libro> lista = new ArrayList<>();
-		Libro a= new Libro(1,231,"titulo1");
+		Libro a= new Libro();
+		a.setId(1);
+		a.setIsbn(231);
+		a.setTitulo("titulo1");
 		Libro b= new Libro(2,123,"titulo2");
 		Libro c= new Libro(3,213,"titulo3");
         lista.add(a);
         lista.add(b);
         lista.add(c);
+        
+      //Uso el mockito con los service de las clases, y para las aserciones uso el resource
         
         Mockito.when(service.listado()).thenReturn(lista);
         
@@ -61,11 +66,10 @@ public class LibroResourceTest {
 	@Test
 	public void testCrearLibro() {
 		Libro a= new Libro(1,41,"elLibroSinNombre");
-		Libro b = service.crearLibro(a);
 		
 		Mockito.when(service.crearLibro(Mockito.any())).thenReturn(a);
 		
-		Assertions.assertEquals("elLibroSinNombre", resource.crearLibro(b).getTitulo());
+		Assertions.assertEquals("elLibroSinNombre", resource.crearLibro(a).getTitulo());
 		
 	}
 	
@@ -73,16 +77,19 @@ public class LibroResourceTest {
 	public void testBorrarLibro() {
 		Libro a = new Libro(1, 200, "LibroBorrado");
 		
-		Mockito.when(service.getLibro(1)).thenReturn(null);
-		service.borrarLibro(a.getId());
-		Assertions.assertEquals(service.getLibro(1), null);
+		//Mockito.when(service.getLibro(1)).thenReturn(null);
+		resource.crearLibro(a);
+		resource.borrarLibro(a.getId());
+		Assertions.assertEquals(resource.getLibro(1), null);
+		
 	}
 	
 	@Test
 	public void testActualizarLibro() {
 		Libro a = new Libro(1,112,"Experimento");
-		Mockito.when(service.actualizarLibro(Mockito.any())).thenReturn(a);
-		Libro actualizado = service.actualizarLibro(a);
-		Assertions.assertEquals(actualizado.getTitulo(),"Experimento");
+		Libro a2 = new Libro (1,112,"Experimento conseguido");
+		Mockito.when(service.actualizarLibro(Mockito.any())).thenReturn(a2);
+		a= resource.actualizarLibro(a2);
+		Assertions.assertEquals(a.getTitulo(),"Experimento conseguido");
 	}
 }

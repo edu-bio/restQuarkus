@@ -31,12 +31,17 @@ public class AutorResourceTest {
 	@BeforeEach
     void setUp() {
 		List<Autor> lista = new ArrayList<>();
-		Autor a= new Autor(1,"pepito","perez");
+		Autor a= new Autor();
+		a.setApellidos("perez");
+		a.setId(1);
+		a.setNombre("pepito");
 		Autor b= new Autor(1,"Ramon","Ramirez");
 		Autor c= new Autor(1,"Pedro","Picapiedra");
         lista.add(a);
         lista.add(b);
         lista.add(c);
+        
+        //Uso el mockito con los service de las clases, y para las aserciones uso el resource
         
         Mockito.when(service.listado()).thenReturn(lista);
         
@@ -70,21 +75,23 @@ public class AutorResourceTest {
 		
 	}
 	
+	
 	@Test
 	public void testBorrarAutor() {
 		Autor a = new Autor(102, "SinNombre", "SinApellido");
 		
-		Mockito.when(service.getAutor(102)).thenReturn(null);
-		service.borrarAutor(a.getId());
-		Assertions.assertEquals(service.getAutor(102), null);
-		
+		//Mockito.when(service.getLibro(1)).thenReturn(null);
+		resource.crearAutor(a);
+		resource.borrarAutor(a.getId());
+		Assertions.assertEquals(resource.getAutor(1), null);
 	}
 	
 	@Test
 	public void testActualizarAutor() {
 		Autor a = new Autor(112,"Cobaya", "DeLaboratorio");
-		Mockito.when(service.actualizarAutor(Mockito.any())).thenReturn(a);
-		Autor actualizado = service.actualizarAutor(a);
-		Assertions.assertEquals(actualizado.getId(),112);
+		Autor a2 = new Autor(112,"Cobaya", "DeLaboratorio insignificante");
+		Mockito.when(service.actualizarAutor(Mockito.any())).thenReturn(a2);
+		a= resource.actualizarAutor(a2);
+		Assertions.assertEquals(a.getApellidos(),"DeLaboratorio insignificante");
 	}
 }
