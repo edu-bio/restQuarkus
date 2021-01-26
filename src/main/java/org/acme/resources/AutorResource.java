@@ -17,7 +17,11 @@ import org.acme.services.AutorService;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
+
 //los endopoints que pones en el puerto quarkus
+
 
 @Path("/authors")
 @ApplicationScoped
@@ -27,13 +31,18 @@ public class AutorResource {
     @RestClient
     AutorService autorService;
 
+   
+    @Counted(description = "Numero de veces que es invocado el metodo acceso")
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
+    @Timed(description = "Media de cuanto le supone ejecutar el metodo.")
     public List<Autor> listado() {
         return autorService.listado();
     }
     
+
+    @Counted(value = "time.now", description = "Numero de veces que es invocado el metodo acceso")
     @GET
     @Path("/{autorId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -62,4 +71,5 @@ public class AutorResource {
     	System.err.println("init resoruce");
     	return autorService.actualizarAutor(autor);
     }
+
 }
